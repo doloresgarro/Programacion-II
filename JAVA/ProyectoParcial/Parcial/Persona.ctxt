@@ -1,0 +1,20 @@
+#BlueJ class context
+comment0.target=Persona
+comment0.text=\r\n\ la\ persona\ que\ realiz\u00F3\ la\ solicitud,\ se\ conoce\:\ nombre,\ apellido\r\ny\ CUIT.\ Las\ solicitudes\ de\ subsidios\ pueden\ ser\ para\ gas\ natural\ o\ para\ energ\u00EDa\ el\u00E9ctrica.\r\n
+comment1.params=nombre\ apellido\ CUIT
+comment1.target=Persona(java.lang.String,\ java.lang.String,\ int)
+comment2.params=
+comment2.target=Persona()
+comment3.params=
+comment3.target=java.lang.String\ getNombre()
+comment4.params=nombre
+comment4.target=void\ setNombre(java.lang.String)
+comment5.params=
+comment5.target=java.lang.String\ getApellido()
+comment6.params=apellido
+comment6.target=void\ setApellido(java.lang.String)
+comment7.params=
+comment7.target=int\ getCUIT()
+comment8.params=CUIT
+comment8.target=void\ setCUIT(int)
+numComments=9

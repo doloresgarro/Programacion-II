@@ -1,0 +1,77 @@
+ORG 1000H
+cadena db "S3term1n4laÇuR5Ad4!"
+mayus db 41H 
+minus db 61H
+arroba db 40H
+num db 30H ; primer numero
+fin_numeros db 39H
+resultado db 0 ; para almacenar resultado en memoria
+
+ORG 3000H
+
+REEMP_A: PUSH AX
+PUSH BX
+PUSH CX
+; Pusheo todo (menos DX porque quiero q me devuelva si es letra 
+;o numero) para que sea reusable
+
+MOV AL, arroba
+MOV CL, minus
+MOV CH, mayus
+MOV AH, num 
+MOV DL, fin_numeros
+MOV DH, 00H ; cada vez que vuelvo a la subrutina lo vuelvo a poner
+;en 0 porque si el anterior es un numero y su siguiente no, lo cuenta
+
+
+
+; primero veo si es letra y si es, despues pregunto si es "a" o "A"
+LOOP: CMP [BX], AH ; comparo el car con primer numero y asi sucesivamente
+JZ NUMERO ; si son iguales, es un numero por lo tanto que no haga nada
+INC AH 
+CMP DL, AH 
+JNS LOOP  
+; si sale del loop es porque no es un numero
+
+;analizo si es "a" o "A"
+CMP [BX], CL ; comparo el car con la minus 
+JZ convertir  
+CMP [BX], CH ; comparo el car con la mayus
+JZ convertir 
+
+MOV DH, 00H ; para indicar que no es numero (puede ser letra o @,/ ,& , etc)
+JMP FIN
+
+convertir: MOV [BX], AL ; almaceno el arroba en el parámetro por ref via regstro
+JMP FIN
+
+NUMERO: MOV DH, 01H ; para indicar que es numero
+
+FIN: POP CX
+POP BX 
+POP AX
+RET
+
+ORG 2000H
+
+MOV BX, OFFSET cadena ; paso la direc del car/cadena por referencia
+MOV CL, OFFSET mayus - OFFSET cadena ; dimL de la cadena
+MOV CH, 0 ; contador de numeros
+
+RECORRE: CALL REEMP_A
+;veo si es numero, si es lo cuento
+CMP DH, 01H 
+JNZ saltar
+INC CH ; incremento contador de numeros
+
+saltar: INC BX 
+DEC CL
+JNZ RECORRE
+
+;almaceno en memoria el resultado de la cantidad de nums de la cadena
+MOV BX, OFFSET resultado
+MOV [BX], CH
+
+
+HLT 
+END

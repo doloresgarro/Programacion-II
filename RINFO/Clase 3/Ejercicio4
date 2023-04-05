@@ -1,0 +1,109 @@
+programa Ej4  
+procesos  
+  proceso Contador(ES flores: numero; ES papeles: numero; ES floresRN: numero; ES papelesRN: numero)
+  comenzar
+    floresRN:= floresRN + flores
+    papelesRN:= papelesRN + papeles 
+  fin
+  proceso Maximo(ES totalR1: numero; ES totalR1: numero; ES totalR1: numero; ES totalR1: numero; ES Rmax: numero) 
+  variables 
+    max: numero
+  comenzar 
+    max:= -1 
+    si (totalR1 > max)
+      max:= totalR1
+      Rmax:= 1
+    sino
+      si (totalR2 > max)
+        max:= totalR2
+        Rmax:= 2
+      sino 
+        si(totalR3 > max)
+          max:= totalR3
+          Rmax:= 3
+        sino 
+          max:= totalR4
+          Rmax:= 4
+  fin        
+areas
+  area1: AreaC(5,5,50,30)  
+  areaCoordinador: AreaP(1, 1, 1, 1)  
+robots  
+  robot tipo1    
+  variables     
+    esquina: numero 
+  comenzar   
+    RecibirMensaje(flores, robotCoordinador)
+    RecibirMensaje(papeles, robotCoordinador)
+    Random(esquina, 100, 100) 
+    mientras (HayFlorEnLaEsquina)
+      tomarFlor 
+      flores:= flores + 1 
+    mientras (HayPapelEnLaEsquina) 
+      tomarPapel 
+      papeles:= papeles + 1   
+    EnviarMensaje(flores, robotCoordinador) 
+    EnviarMensaje(papeles, robotCoordinador) 
+  fin
+  robot tipo2
+  variables 
+    Rmax, flores, papeles: numero
+    floresR1, floresR2, floresR3, floresR4: numero
+    papelesR1, papelesR2, papelesR3, papelesR4: numero
+    totalR1, totalR2, totalR3, totalR4: numero
+  comenzar 
+    floresR1:= 0
+    floresR2:=0 
+    floresR3:= 0 
+    floresR4:= 0
+    papelesR1:= 0
+    papelesR2:= 0
+    papelesR3:= 0
+    papelesR4:= 0
+    totalR1:= 0
+    totalR2:= 0 
+    totalR3:= 0
+    totalR4:= 0
+    repetir 20
+      flores:= 0
+      papeles:= 0
+      EnviarMensaje(flores, *)
+      EnviarMensaje(papeles, *)
+      RecibirMensaje(flores, *) 
+      RecibirMensaje(papeles, *)
+      si (* = robot1) {Como preguntar que robot es}
+        Contador(flores,papeles, floresR1, papelesR1)
+      sino 
+        si (* = robot2)
+         Contador(flores,papeles, floresR2, papelesR2)  
+        sino 
+          si (* = robot3)
+            Contador(flores,papeles, floresR3, papelesR3)  
+          sino 
+            Contador(flores,papeles, floresR4, papelesR24) 
+  fin 
+  totalR1:= floresR1 + papelesR1
+  totalR2:= floresR2 + papelesR2
+  totalR3:= floresR3 + papelesR3
+  totalR4:= floresR4 + papelesR4
+  Maximo(totalR1, totalR2, totalR3, totalR4, Rmax)
+  Informar('El-ROBOT-que-mas-junto-fue-',Rmax)
+  fin 
+variables     
+  robot1: tipo1     
+  robot2: tipo1       
+  robot3: tipo1 
+  robot4: tipo1
+  robotCoordinador: tipo2 
+comenzar   
+  AsignarArea(robot1,area1)    
+  AsignarArea(robot2,area1)   
+  AsignarArea (robot3, area1) 
+  AsignarArea (robot4, area1)
+  AsignarArea(robotCoordinador, areaCoordinador)
+  Iniciar(robot1, 7, 4)   
+  Iniciar(robot2, 9, 4) 
+  Iniciar(robot3, 11, 4)  
+  Iniciar(robot4, 13, 4) 
+  Iniciar (robotCoordinador, 1, 1) 
+fin

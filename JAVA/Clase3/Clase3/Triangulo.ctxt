@@ -1,0 +1,32 @@
+#BlueJ class context
+comment0.target=Triangulo
+comment0.text=\r\nDefinir\ una\ clase\ para\ representar\ tri\u00E1ngulos.\ Un\ tri\u00E1ngulo\ se\ caracteriza\ por\ el\ tama\u00F1o\ de\ sus\ 3\ lados\ (double),\ \r\nel\ color\ de\ relleno\ (String)\ y\ el\ color\ de\ l\u00EDnea\ (String).\ \r\n\r\nEl\ tri\u00E1ngulo\ debe\ saber\:\ \r\n\ \ \ \ Devolver/modificar\ el\ valor\ de\ cada\ uno\ de\ sus\ atributos\ (m\u00E9todos\ get\#\ y\ set\#)\ \r\n\ \ \ \ Calcular\ el\ \u00E1rea\ y\ devolverla\ (m\u00E9todo\ calcularArea)\r\n\ \ \ \ Calcular\ el\ per\u00EDmetro\ y\ devolverlo\ (m\u00E9todo\ calcularPerimetro)\r\n\r\nNOTA\:\ Calcular\ el\ \u00E1rea\ con\ la\ f\u00F3rmula\ \ \u00C1rea\=\ \u221A(s(s-a)(s-b)(s-c))\ \ \ ,\ \r\ndonde\ a,b\ y\ c\ son\ los\ lados\ y\ s\=(a+b+c)/2\ .\ La\ funci\u00F3n\ ra\u00EDz\ cuadrada\ es\ Math.sqrt(\#)\r\n\r\n
+comment1.params=lado1\ lado2\ lado3\ relleno\ linea
+comment1.target=Triangulo(double,\ double,\ double,\ java.lang.String,\ java.lang.String)
+comment10.params=relleno
+comment10.target=void\ setColorR(java.lang.String)
+comment11.params=
+comment11.target=java.lang.String\ getColorL()
+comment12.params=linea
+comment12.target=void\ setColorL(java.lang.String)
+comment13.params=
+comment13.target=double\ getCalcularArea()
+comment14.params=
+comment14.target=double\ getCalcularPerimetro()
+comment2.params=
+comment2.target=Triangulo()
+comment3.params=
+comment3.target=double\ getA()
+comment4.params=lado1
+comment4.target=void\ setA(double)
+comment5.params=
+comment5.target=double\ getB()
+comment6.params=lado2
+comment6.target=void\ setB(double)
+comment7.params=
+comment7.target=double\ getC()
+comment8.params=lado3
+comment8.target=void\ setC(double)
+comment9.params=
+comment9.target=java.lang.String\ getColorR()
+numComments=15

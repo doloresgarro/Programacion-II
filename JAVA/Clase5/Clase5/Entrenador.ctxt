@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Entrenador
+comment0.text=\r\n\ B-\ Implemente\ constructores\ para\ los\ jugadores\ y\ entrenadores,\ que\ reciban\ toda\ la\ informaci\u00F3n\r\n\ necesaria\ para\ inicializar\ el\ objeto\ en\ cuesti\u00F3n.\ \r\n\uF0A7Los\ entrenadores\ son\ empleados\ \ que\ se\ caracterizan\ por\ la\ cantidad\ de\ campeonatos\ ganados.\r\n\r\n
+comment1.params=nombre\ DNI\ edad\ sueldoBasico\ ganados
+comment1.target=Entrenador(java.lang.String,\ int,\ int,\ double,\ int)
+comment2.params=
+comment2.target=int\ getGanados()
+comment3.params=ganados
+comment3.target=void\ setGanados(int)
+comment4.params=
+comment4.target=double\ calcularSueldo()
+comment5.params=
+comment5.target=java.lang.String\ toString()
+numComments=6

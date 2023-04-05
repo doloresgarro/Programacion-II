@@ -1,0 +1,101 @@
+ORG 1000H
+
+cadena db "ValeriaDolores"
+fin_cadena db ?
+nombre1 db "Valeria"
+fin_nombre1 db ?
+
+tabla DB "aeiouAEIOU" ; 
+fin_tabla DB ?; 
+cantidad db 0
+
+;V1 DB 1
+;V2 DB 2
+
+ORG 3000H
+
+
+ES_VOCAL: MOV AL, [BX] ; copia el primer elemento de la tabla de vocales
+INC BX ; Avanza en la direc de la tabla
+CMP DL, AL ; compara el valor de la tabla con la letra
+JZ vocal ; si son iguales
+MOV AX, 00H ; si no son iguales
+
+dec CL; disminuye dimL de las vocales
+JNZ ES_VOCAL ; si el resultado no es cero que siga 
+JMP fin
+vocal: MOV AX, 0FFH ; si es vocal pone 0FFh en un registro
+fin: ret
+
+
+ANALIZARVOCAL: PUSH AX
+PUSH BX
+PUSH CX
+PUSH DX
+
+MOV DL, [BX] ; movemos primer elemento de la cadena a DL
+ 
+MOV BX, OFFSET tabla ; guarda en registros cada una de las vocales para comparar
+MOV CL, OFFSET fin_tabla - OFFSET tabla ; guarda dimLogica de vocales
+CALL ES_VOCAL
+
+CMP AX, 0FFh
+JNZ continuar
+MOV BX, OFFSET cantidad 
+
+ADD BYTE PTR [BX], 1 ; si es vocal, suma 1 en memoria
+
+continuar: POP DX
+POP CX
+POP BX
+POP AX
+
+RET
+
+
+SWAP: PUSH AX
+PUSH BX 
+PUSH CX
+PUSH DX 
+
+MOV AL, [BX] ; pasamos un valor de la cadena a AL
+PUSH BX ;
+MOV BX, DX ; Pasamos dirección del fin de la cadena A BX
+MOV AH, [BX] ; Movemos elemento de la cadena a AH (desde el final)
+
+MOV [BX], AL ; pasamos el valor del primer elemento al valor del último
+POP BX
+MOV [BX], AH ; pasamos el valor del último elemento al primero de la cadena
+
+POP DX
+POP CX
+POP BX
+POP AX
+
+RET
+
+ORG 2000H
+;MOV BX, OFFSET V1
+;MOV CX, OFFSET V2
+;CALL SWAP 
+
+MOV BX, OFFSET cadena 
+;MOV CL, OFFSET fin_cadena - OFFSET cadena ;guardo dim lógica de la tabla
+MOV CL, OFFSET fin_nombre1 - OFFSET nombre1 ; guarda dimLógica de un nombre 
+MOV DX, OFFSET fin_cadena - 1
+
+
+; En bx tenemos direc  primer caracter y en dx direc del segundo
+
+Loop: CALL ANALIZARVOCAL ; Vemos si el primer caracter es una vocal
+CALL SWAP
+CALL ANALIZARVOCAL ; Analizamos si el caracter intercambiado es una vocal
+
+inc BX ; para buscar direc 1001h,1002h.....
+dec DX ; para buscar direc 100Ch...100Bh...100Ah
+
+dec CL; disminuyo dim lógica
+JNZ Loop; si el resultado no da 0, salto
+
+HLT 
+END

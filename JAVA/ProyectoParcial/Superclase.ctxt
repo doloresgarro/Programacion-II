@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Superclase
+comment0.text=\r\n\ \ \ \ SUPERCLASE\r\n
+comment1.params=
+comment1.target=Superclase()
+comment2.params=nombre\ DNI\ edad\ SueldoBasico
+comment2.target=Superclase(java.lang.String,\ int,\ int,\ double)
+comment3.params=
+comment3.target=java.lang.String\ getNombre()
+comment4.params=nombre
+comment4.target=void\ setNombre(java.lang.String)
+comment5.params=
+comment5.target=java.lang.String\ toString()
+comment6.params=
+comment6.target=double\ calcularSueldo()
+numComments=7

@@ -1,0 +1,24 @@
+#BlueJ class context
+comment0.target=Vehiculo
+comment0.text=\r\n\ Existen\ diferentes\ tipos\ de\ veh\u00EDculos\:\r\n-\ \ \ \ Automotor,\ que\ tambi\u00E9n\ tiene\ asociado\ una\ patente,\ un\ importe\ adicional\ seg\u00FAn\ el\ a\u00F1o\ de\ fabricaci\u00F3n\ y\ una\ descripci\u00F3n.\r\n-\ \ \ \ Embarcaci\u00F3n,\ que\ tiene\ asociado\ un\ c\u00F3digo\ del\ Registro\ Especial\ de\ Yates\ (REY),\ nombre,\ un\ tipo\ de\ embarcaci\u00F3n\ \r\n(lancha,\ crucero,\ velero,\ etc.),\ eslora\ (longitud\ de\ proa\ a\ popa),\ un\ tonelaje\ (peso)\ y\ un\ valor\ declarado\ de\ la\ embarcaci\u00F3n.\r\n\r\nLa\ Agencia\ necesita\ calcular\ los\ costos\ de\ los\ impuestos\ de\ la\ siguiente\ manera\:\r\n-\ \ \ \ De\ los\ automotores,\ el\ propietario\ paga\ mensualmente\ el\ importe\ b\u00E1sico\ m\u00E1s\ el\ adicional\ calculado\ seg\u00FAn\ su\ a\u00F1o\ de\r\n\ fabricaci\u00F3n.\r\n-\ \ \ \ De\ las\ embarcaciones,\ el\ propietario\ paga\ un\ monto\ semestral\ que\ var\u00EDa\ seg\u00FAn\ el\ valor\ declarado\ de\ la\ embarcaci\u00F3n\:\r\n\ valuadas\ hasta\ $6.000,\ pagan\ el\ 4%\ del\ su\ valor\ declarado;\ entre\ $6.000\ y\ $180.000,\ pagan\ el\ 2%\ del\ valor\ declarado\ y,\ \r\n\ finalmente\ superiores\ a\ $180.000\ pagan\ el\ 5%\ de\ dicho\ valor\ declarado.\r\n\r\n\ \r\n
+comment1.params=a\u00F1o\ importe\ propietario
+comment1.target=Vehiculo(int,\ double,\ Propietario)
+comment10.params=
+comment10.target=double\ calcularImpuesto()
+comment2.params=
+comment2.target=Vehiculo()
+comment3.params=propietario
+comment3.target=void\ setPropietario(Propietario)
+comment4.params=a\u00F1o
+comment4.target=void\ setA\u00F1o(int)
+comment5.params=importe
+comment5.target=void\ setImporte(double)
+comment6.params=
+comment6.target=int\ getA\u00F1o()
+comment7.params=
+comment7.target=double\ getImporte()
+comment8.params=
+comment8.target=Propietario\ getPropietario()
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=11

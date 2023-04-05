@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Responsable
+comment0.text=\r\n\ \ \ \ \ Para\ el\ responsable\ se\ registra\ su\ DNI,\ nombre\ y\ apellido.\ \r\n
+comment1.params=nombreApellido\ DNI
+comment1.target=Responsable(java.lang.String,\ int)
+comment2.params=
+comment2.target=Responsable()
+comment3.params=
+comment3.target=java.lang.String\ getNombreApellido()
+comment4.params=nombreApellido
+comment4.target=void\ setNombreApellido(java.lang.String)
+comment5.params=
+comment5.target=int\ getDNI()
+comment6.params=DNI
+comment6.target=void\ setDNI(int)
+numComments=7

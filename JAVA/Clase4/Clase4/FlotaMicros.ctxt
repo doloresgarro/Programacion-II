@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=FlotaMicros
+comment0.text=\r\n4-A-\ Definir\ una\ clase\ para\ representar\ flotas\ de\ micros.\ Una\ flota\ se\ caracteriza\ por\ conocer\ a\ los\ micros\ que\ la\ componen\r\n\ (a\ lo\ sumo\ 15).\ \r\ni.\ \ \ \ Defina\ un\ constructor\ para\ crear\ una\ flota\ vac\u00EDa\ (sin\ micros)\r\n\r\nImplemente\ m\u00E9todos\ para\:\r\nii.\ \ \ \ devolver\ si\ la\ flota\ est\u00E1\ completa\ (tiene\ 15\ micros)\ o\ no.\r\niii.\ \ \ \ agregar\ a\ la\ flota\ un\ micro\ recibido\ como\ par\u00E1metro.\r\niv.\ \ \ \ eliminar\ de\ la\ flota\ el\ micro\ con\ patente\ igual\ a\ una\ recibida\ como\ par\u00E1metro.\r\nv.\ \ \ \ buscar\ en\ la\ flota\ un\ micro\ con\ patente\ igual\ a\ una\ recibida\ como\ par\u00E1metro\ y\ retornarlo\ \r\n\ \ \ \ \ \ \ \ (en\ caso\ de\ no\ existir\ dicho\ micro,\ retornar\ NULL).\ \r\nvi.\ \ \ \ buscar\ en\ la\ flota\ un\ micro\ con\ destino\ igual\ a\ uno\ recibido\ como\ par\u00E1metro\ y\ retornarlo\ \r\n\ \ \ \ \ \ \ \ (en\ caso\ de\ no\ existir\ dicho\ micro,\ retornar\ NULL).\ \r\n\r\n
+comment1.params=
+comment1.target=FlotaMicros()
+comment2.params=
+comment2.target=void\ Inicializar()
+comment3.params=m
+comment3.target=void\ agregarMicro(Micro)
+comment4.params=
+comment4.target=boolean\ getLleno()
+comment5.params=patente
+comment5.target=void\ EliminarMicro(java.lang.String)
+comment6.params=patente
+comment6.target=Micro\ BuscarPatente(java.lang.String)
+comment7.params=destino
+comment7.target=Micro\ BuscarDestino(java.lang.String)
+numComments=8

@@ -1,0 +1,11 @@
+#BlueJ class context
+comment0.target=ProgramaEditorial
+comment1.params=args
+comment1.target=void\ main(java.lang.String[])
+comment2.params=
+comment2.target=Responsable\ LeerDatosResponsable()
+comment3.params=vector\ i
+comment3.target=void\ LeerLibro(Ejemplar[],\ int)
+comment4.params=vector\ i
+comment4.target=void\ LeerRevista(Ejemplar[],\ int)
+numComments=5

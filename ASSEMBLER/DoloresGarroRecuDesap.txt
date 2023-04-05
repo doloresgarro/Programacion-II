@@ -1,0 +1,101 @@
+ORG 1000H 
+
+cadena db "e4stE&3s.el.r3çup3R@t0r1o!"
+minus db "abcdefghijklmnopqrstuvwxyz"
+mayus db "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+contador db 0
+car db "E"
+
+ORG 3000H
+
+ES_LETRA: PUSH AX 
+PUSH BX
+MOV BX, OFFSET minus ; direc del primer elemento
+MOV CL, OFFSET mayus - OFFSET minus ; 
+
+loop: MOV AH, [BX] ; a AL le pongo elemento de la tabla 
+CMP AL, AH
+JZ letra 
+MOV CH, 00H
+INC BX 
+DEC CL
+JNZ loop
+JMP FIN
+
+letra: MOV CH, 0FFH
+
+FIN: POP BX 
+POP AX 
+RET
+
+
+MAYUS: PUSH BX
+PUSH CX
+PUSH DX
+
+MOV BX, SP
+ADD BX, 8
+MOV BX, [BX]
+MOV AL, [BX] ; COPIO CARACTER por pila y por registro
+
+CALL ES_LETRA
+CMP CH, 0FFH 
+JNZ fin
+
+PUSH BX ; guardo direc de tabla de cadena en la pila
+
+MOV DX, 0 ; contador para sumarle a direc de minus
+MOV BX, OFFSET mayus ; direc tabla mayus
+MOV CX, OFFSET minus ; direc tabla minus
+
+bucle: PUSH BX 
+MOV BX, CX 
+ADD BX, DX   ; para ir a la posicion que quiero de la tabla
+MOV AH, [BX] ; elemento tabla minus
+CMP AH, AL   ; comparo elemn tabla minus con el de cadena
+JZ sigue 
+
+
+POP BX
+INC DX
+INC BX
+CMP BX, 101Ah
+JNZ bucle
+JMP fin
+
+sigue: POP BX 
+MOV AL, [BX]; copio en Al el elemento en mayusc
+POP BX
+MOV [BX], AL ; guardo en memoria el valor mayuscula del car que recibi
+
+fin: POP DX
+POP CX
+POP BX
+RET
+
+
+
+ORG 2000H
+MOV DL, 0 ; contador de E
+MOV CL, OFFSET minus - OFFSET cadena
+MOV BX, OFFSET cadena
+
+RECORRE: PUSH BX
+CALL MAYUS
+POP BX
+
+MOV AL, [BX]
+CMP AL, car
+JNZ salta
+INC DL
+
+salta: INC BX
+DEC CL
+JNZ RECORRE
+
+MOV BX, OFFSET contador 
+MOV [BX], DL
+
+
+HLT
+END

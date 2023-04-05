@@ -1,0 +1,386 @@
+programa Parcial  
+procesos 
+  proceso JuntarFlores(ES flores:numero)  
+  comenzar   
+    mientras(HayFlorEnLaEsquina)  
+      tomarFlor  
+      flores:= flores + 1  
+  fin
+  
+  proceso JuntarPapeles (ES papeles:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      papeles:= papeles + 1 
+  fin
+  
+  proceso recorrerAvenida(ES papeles:numero; E miAv: numero; E miCa: numero) 
+  variables  
+    pasos: numero
+  comenzar  
+    JuntarPapeles (papeles)   
+    Random (pasos, 1, 5)  
+    mientras (PosCa < 50)
+      si (PosCa + pasos < 50)
+        Pos (PosAv, PosCa + pasos){para que salte}
+        JuntarPapeles (papeles) 
+      sino 
+        BloquearEsquina (PosAv, 50)
+        Pos (PosAv, 50)
+        JuntarPapeles (papeles) 
+      Random (pasos, 1, 5) 
+    Pos (miAv, miCa)
+    LiberarEsquina (PosAv, 50) 
+      
+
+  fin  
+  
+  proceso Escalera (ES flores:numero; E miAv: numero; E miCa: numero)  
+  variables
+    ancho: numero
+    AvActual: numero
+    CaActual: numero 
+    
+  comenzar
+    JuntarFlores (flores)
+    repetir 5
+      repetir 3
+        BloquearEsquina (PosAv, PosCa + 1)
+        mover
+        JuntarFlores (flores)
+        LiberarEsquina (PosAv, PosCa - 1)
+      derecha
+      Random (ancho, 3, 5)
+      repetir ancho
+        BloquearEsquina (PosAv + 1, PosCa)
+        mover
+        JuntarFlores (flores)
+        LiberarEsquina (PosAv - 1, PosCa)
+      repetir 3
+        derecha
+    AvActual:= PosAv
+    CaActual:= PosCa
+    BloquearEsquina (miAv, miCa)
+    Pos (miAv, miCa) 
+    LiberarEsquina (AvActual, CaActual)
+    
+  fin
+    
+  proceso maximo(E id: numero; E elementos: numero; ES max: numero; ES ganador: numero)
+  comenzar 
+    si (elementos > max) 
+      max:= elementos 
+      ganador:= id 
+  fin 
+ 
+  proceso esquinaGanador (E elementos: numero; E id: numero; E miAv: numero; E miCa: numero)
+  comenzar
+    BloquearEsquina (100,1)
+    Pos (100,1)
+    si ((id >= 1) & (id <= 4))
+      repetir elementos
+        depositarPapel
+    sino 
+      si ((id>= 5) & (id <=8))
+        repetir elementos
+          depositarFlor
+          
+    Pos (miAv, miCa)
+    LiberarEsquina (100,1)
+  fin
+  
+  proceso recorreCalle50 (E elementos: numero; E id: numero; E miAv: numero; E miCa: numero)
+  variables
+    AvActual: numero
+    CaActual: numero
+  comenzar
+    BloquearEsquina (1,50)
+    Pos (1,50)
+    derecha
+    si ((id >= 1) & (id <= 4))
+      si (HayPapelEnLaBolsa)
+        depositarPapel
+        elementos := elementos - 1
+    sino 
+      si ((id>= 5) & (id <=8))
+        si (HayFlorEnLaBolsa)
+          depositarFlor
+          elementos := elementos - 1
+      
+    mientras ((PosAv<100) & (elementos <> 0))
+      BloquearEsquina (PosAv + 1, 50)
+      mover
+      LiberarEsquina (PosAv - 1, 50)
+      si ((id >= 1) & (id <= 4))
+        si (HayPapelEnLaBolsa)
+          depositarPapel
+          elementos:= elementos - 1
+      sino 
+        si ((id>= 5) & (id <=8))
+          si (HayFlorEnLaBolsa)
+            depositarFlor
+            elementos := elementos - 1
+    AvActual:= PosAv
+    CaActual:= PosCa
+    Pos (miAv, miCa)
+    LiberarEsquina (AvActual, CaActual)
+    Informar ('El_Robot_llega_hasta_la_calle_50_avenida_', AvActual)
+   
+  fin
+  
+areas  
+  areaCorredor1: AreaP (5,1,5,49)
+  areaCorredor2: AreaP (10,1,10,49)
+  areaCorredor3: AreaP (15,1,15,49)
+  areaCorredor4: AreaP (20,1,20,49)
+  areaEscaladores: AreaC (5,51,45,66)
+  esquina: AreaC (100,1,100,1)
+  calle50: AreaC (1,50,100,50)
+  areaJUEZ: AreaP (1,1,1,1) 
+ 
+robots   
+  robot tipoCorredor
+  variables  
+    id: numero  
+    papeles: numero
+    ok: boolean
+    ganador1: numero
+    miAv: numero
+    miCa: numero
+    
+  comenzar 
+    papeles:=0  
+    miAv:= PosAv
+    miCa:= PosCa
+    {Recibir el identificador de robot del administrador}  
+    RecibirMensaje (id, juez) 
+    {Recorrer la avenida} 
+    recorrerAvenida (papeles, miAv, miCa) 
+    
+    ok:= V
+    si (id = 1) 
+      EnviarMensaje (1, e1)
+      EnviarMensaje (ok, e1)
+    sino
+      si (id = 2)
+        EnviarMensaje (2, e2)
+        EnviarMensaje (ok, e2)
+      sino
+        si (id = 3)
+          EnviarMensaje (3, e3)
+          EnviarMensaje (ok, e3)
+        sino
+          si (id = 4)
+            EnviarMensaje (4, e4)
+            EnviarMensaje (ok, e4)
+    
+    
+    {Sincronizar con juez} 
+    EnviarMensaje(id,juez)  
+    {Enviar cantidad de papeles juntados}  
+    EnviarMensaje(papeles,juez)   
+    
+    {Esperar resultado de ganador}  
+    RecibirMensaje(ganador1,juez)   
+    
+    {Verificar si gano} 
+    si (ganador1 = id)  
+      esquinaGanador (papeles, id, miAv, miCa)
+    sino 
+      recorreCalle50 (papeles, id, miAv, miCa)
+      {informar ultima esquina} 
+   
+    {Volver al inicio} 
+    Pos(miAv,miCa) 
+     
+  fin 
+  
+  robot tipoEscalador
+  variables
+    id: numero
+    idC: numero
+    flores: numero
+    ok: boolean
+    miAv: numero
+    miCa: numero
+    ganador2: numero
+    
+  comenzar
+    flores:= 0
+    miAv:= PosAv
+    miCa:= PosCa
+    
+    {Recibir el identificador de robot del administrador}  
+    RecibirMensaje (id, juez) 
+    
+    {Recibir id de un robot corredor}
+    RecibirMensaje (idC, *)
+    {Recibe orden de salida}
+    si (idC = 1)
+      RecibirMensaje (ok, c1)
+    sino
+      si (idC = 2)
+        RecibirMensaje (ok, c2)
+      sino
+        si (idC = 3) 
+          RecibirMensaje (ok, c3)
+        sino
+          si (idC = 4)
+            RecibirMensaje (ok, c4)
+    BloquearEsquina (PosAv, PosCa)
+    Escalera (flores, miAv, miCa)
+    
+    {Sincronizar con juez}
+    EnviarMensaje (id, juez)
+    {Enviar cantidad de flores juntadas}
+    EnviarMensaje (flores, juez)
+    RecibirMensaje (ganador2,juez)  
+    {Verificar si gano}      
+    si (ganador2 = id) 
+      esquinaGanador (flores, id, miAv, miCa)
+    sino  
+      recorreCalle50 (flores, id, miAv, miCa) 
+      
+    
+  fin
+  
+ 
+  robot tipoJuez 
+  variables   
+    id: numero
+    flores: numero
+    papeles: numero
+    max1: numero
+    max2: numero
+    ganador1: numero
+    ganador2: numero
+    
+  comenzar
+    {Inicializar maximos y total de flores} 
+    max1:= -1 
+    max2:= -1  
+    {Enviar id a los ejecutores} 
+    EnviarMensaje (1,c1)  
+    EnviarMensaje (2,c2)  
+    EnviarMensaje (3,c3)  
+    EnviarMensaje (4,c4) 
+    EnviarMensaje (5,e1)
+    EnviarMensaje (6,e2)   
+    EnviarMensaje (7,e3)       
+    EnviarMensaje (8,e4)    
+       
+   {Recepcion de papeles juntadas por cada corredor} 
+    repetir 4 
+      RecibirMensaje (id, *) 
+      si(id=1)  
+        RecibirMensaje (papeles, c1)  
+      sino  
+        si(id = 2)  
+          RecibirMensaje (papeles, c2)  
+        sino  
+          si(id = 3)  
+            RecibirMensaje (papeles, c3)  
+          sino 
+            si(id = 4) 
+              RecibirMensaje (papeles, c4) 
+            sino  
+              Informar('error',00)        
+      maximo(id, papeles, max1, ganador1) 
+    
+    {Recepcion de flores junatadas por cada escalador} 
+    repetir 4  
+      RecibirMensaje (id,*)  
+      si (id = 5) 
+        RecibirMensaje (flores,e1) 
+      sino 
+        si(id = 6)  
+          RecibirMensaje (flores, e2) 
+        sino 
+          si(id = 7) 
+            RecibirMensaje (flores, e3) 
+          sino 
+            si (id = 8)
+              RecibirMensaje (flores, e4) 
+            sino
+              Informar ('error', 00)        
+      maximo (id, flores, max2, ganador2) 
+
+    
+    {Enviar resultado a corredores y escaladores} 
+    EnviarMensaje (ganador1, c1)
+    EnviarMensaje (ganador2, e1)
+    EnviarMensaje (ganador1, c2) 
+    EnviarMensaje (ganador2, e2) 
+    EnviarMensaje (ganador1, c3) 
+    EnviarMensaje (ganador2, e3)
+    EnviarMensaje (ganador1, c4) 
+    EnviarMensaje (ganador2, e4) 
+
+    Informar('Ganador_Corredor_' ,ganador1) 
+    Informar('Ganador_Escalador_' ,ganador2) 
+    
+   
+  fin
+  
+variables 
+  juez: tipoJuez
+  c1: tipoCorredor
+  c2: tipoCorredor
+  c3: tipoCorredor
+  c4: tipoCorredor
+  e1: tipoEscalador
+  e2: tipoEscalador
+  e3: tipoEscalador
+  e4: tipoEscalador
+  
+comenzar 
+
+  AsignarArea (c1, areaCorredor1)  
+  AsignarArea (c2, areaCorredor2)  
+  AsignarArea (c3, areaCorredor3)  
+  AsignarArea (c4, areaCorredor4)  
+  
+  AsignarArea (e1, areaEscaladores) 
+  AsignarArea (e2, areaEscaladores) 
+  AsignarArea (e3, areaEscaladores) 
+  AsignarArea (e4, areaEscaladores) 
+  
+  AsignarArea (c1, esquina)
+  AsignarArea (c2, esquina)    
+  AsignarArea (c3, esquina)  
+  AsignarArea (c4, esquina)  
+
+  AsignarArea (e1, esquina)
+  AsignarArea (e2, esquina)
+  AsignarArea (e3, esquina)  
+  AsignarArea (e4, esquina)
+  
+  AsignarArea (c1, calle50)    
+  AsignarArea (c2, calle50)    
+  AsignarArea (c3, calle50)    
+  AsignarArea (c4, calle50)    
+  
+  AsignarArea (e1, calle50)    
+  AsignarArea (e2, calle50)    
+  AsignarArea (e3, calle50)    
+  AsignarArea (e4, calle50)    
+  
+  AsignarArea (juez, areaJUEZ)
+  
+  Iniciar (juez, 1, 1)
+  
+  Iniciar (c1, 5,1)  
+  Iniciar (c2, 10,1)  
+  Iniciar (c3, 15,1)  
+  Iniciar (c4, 20,1)  
+  
+  Iniciar (e1, 5,51)   
+  Iniciar (e2, 10,51)   
+  Iniciar (e3, 15,51)   
+  Iniciar (e4, 20,51)   
+
+  
+fin 
+ 
+
+

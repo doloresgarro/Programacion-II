@@ -1,0 +1,14 @@
+#BlueJ class context
+comment0.target=Balanza
+comment0.text=\r\n\ Definir\ una\ clase\ para\ representar\ balanzas\ comerciales\ (para\ ser\ utilizadas\ en\ verduler\u00EDas,\ carnicer\u00EDas,\ etc).\ \r\n\ Una\ balanza\ comercial\ s\u00F3lo\ mantiene\ el\ monto\ y\ la\ cantidad\ de\ items\ correspondientes\ a\ la\ compra\ actual\ \r\n\ (es\ decir,\ no\ almacena\ los\ \u00EDtems\ de\ la\ compra).\ La\ balanza\ debe\ responder\ a\ los\ siguientes\ mensajes\:\ \r\n\uF0A7\ \ \ \ iniciarCompra()\:\ inicializa\ el\ monto\ y\ cantidad\ de\ \u00EDtems\ de\ la\ compra\ actual.\ \r\n\uF0A7\ \ \ \ \r\n\ \ \ \ \ \ \ \ registrarProducto(pesoEnKg,\ precioPorKg)\:\ recibe\ el\ peso\ en\ kg\ del\ \u00EDtem\ comprado\ \r\n\ \ \ \ \ \ \ \ y\ su\ precio\ por\ kg,\ debiendo\ \ realizar\ las\ actualizaciones\ en\ el\ estado\ de\ la\ balanza.\ \r\n\uF0A7\ \ \ \ devolverMontoAPagar()\:\ retorna\ el\ monto\ de\ la\ compra\ actual.\ \r\n\uF0A7\ \ \ \ devolverResumenDeCompra()\:\ retorna\ un\ String\ del\ siguiente\ estilo\ \r\n\ \ \ \ \ \ \ \ \u201CTotal\ a\ pagar\ X\ por\ la\ compra\ de\ Y\ productos\u201D\ ,\ donde\ X\ es\ el\ monto\ e\ Y\ es\ la\ cantidad\ de\ \u00EDtems\ de\ la\ compra.\ \r\n\r\n
+comment1.params=
+comment1.target=Balanza()
+comment2.params=
+comment2.target=void\ IniciarCompra()
+comment3.params=pesoEnKg\ precioPorKg
+comment3.target=void\ registrarProducto(double,\ double)
+comment4.params=
+comment4.target=double\ getMontoAPagar()
+comment5.params=
+comment5.target=java.lang.String\ devolverResumenDeCompra()
+numComments=6
