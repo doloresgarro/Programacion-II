@@ -1,4 +1,3 @@
-
 /**
 Escriba un programa para restringir la entrada de autos al centro de la ciudad: sólo pasarán aquellos con patente par. 
 Para ello se leen números de patentes, por cada una debe informar en consola si el auto tiene o no permitido el paso. 
