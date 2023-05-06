@@ -1,0 +1,55 @@
+;EXTRA b
+;b) Implemente un programa en Assembler que, utilizando la subrutina del inciso 
+;a), reemplace los valores de la TablaA por los de la TablaB cuando corresponda 
+;(posición a posición). Por ejemplo, si tenemos las siguientes tablas:
+ 
+;-          TablaA à 1, 2, 5, 4, 7,…
+;-          TablaB à 2, 3, 4, 5, 7,…
+ 
+;los valores finales serán: TablaA à 1, 2, 4, 4, 7,…
+ 
+;Además, el programa debe sumar eficientemente los valores de TablaB mayores a 5 y 
+;almacenar este resultado en memoria principal. 
+
+ORG 1000H
+tabla1 DB 1, 2, 5, 4, 7 ; 1000,.., 1004
+fin_tabla1 DB ?; 1005
+tabla2 DB 2, 3, 4, 5, 7 ; 1006..100A
+fin_tabla2 DB ?; 100B
+
+
+;SUBRTUTINAS
+ORG 3000H 
+ 
+; SUBRUTINA QUE REEMPLAZA SI EL VALOR DE B ES MENOR AL DE A
+SUBRUTINA: CMP [BX], AL
+JS FIN ; si da negativo (tabla 1 es mas chico)
+MOV [BX], AL ; reemplaza con el elemento de la tabla 2
+FIN: 	RET
+
+RECORRERTABLA: mov DX,0
+Loop: mov AL, [BX]; guarda primer elemento de la tabla 2
+PUSH BX
+
+mov BX, OFFSET tabla1
+add BX, DX ; para pasar a la posición dependiendo de cuántas veces se hizo
+
+CALL SUBRUTINA
+POP BX
+INC DX
+INC BX
+cmp CX, DX
+
+JNZ Loop
+
+RET
+
+ORG 2000H
+MOV BX, OFFSET tabla2; 1006
+MOV CX, OFFSET fin_tabla2 - OFFSET tabla2; DIMENSIÓN LOGICA: 5
+
+CALL RECORRERTABLA
+
+ 
+HLT 
+END 
